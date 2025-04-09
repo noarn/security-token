@@ -1,0 +1,15 @@
+name: Generate Daily Token
+
+on:
+  schedule:
+    - cron: '0 7 * * *' # runs every day at 07:00 UTC (04:00 in Brazil)
+  workflow_dispatch: # allows manual trigger
+
+jobs:
+  generate-token:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Make POST request to generate token
+        run: |
+          curl -X POST "${{ secrets.SUPABASE_EDGE_URL }}"
